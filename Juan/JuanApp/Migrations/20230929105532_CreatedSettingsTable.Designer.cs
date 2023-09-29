@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JuanApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230928185548_AddedSettingsTable")]
-    partial class AddedSettingsTable
+    [Migration("20230929105532_CreatedSettingsTable")]
+    partial class CreatedSettingsTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,8 +33,8 @@ namespace JuanApp.Migrations
 
                     b.Property<string>("Key")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Value")
                         .IsRequired()

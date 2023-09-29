@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JuanApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230928185325_InitialCreate")]
+    [Migration("20230929105145_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

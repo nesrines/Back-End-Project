@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace JuanApp.Contollers;
+namespace JuanApp.Controllers;
 public class ProductController : Controller
 {
     public async Task<IActionResult> Index()
