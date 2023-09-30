@@ -1,0 +1,78 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Create Product";
+    SelectList selectListCategories = new SelectList(ViewBag.Categories, nameof(Category.Id), nameof(Category.Name));
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">New Product</h1>
+</div>
+
+<div class="row justify-content-8">
+    <form method="post" enctype="multipart/form-data" class="col-8">
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" placeholder="Enter title" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" placeholder="Enter price" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Discount"></label>
+            <input asp-for="Discount" class="form-control" placeholder="Enter discount percentage" />
+            <span asp-validation-for="Discount" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Count"></label>
+            <input asp-for="Count" class="form-control" placeholder="Enter count" />
+            <span asp-validation-for="Count" class="text-danger"></span>
+        </div>
+        <div class="form-check">
+            <input asp-for="IsFeatured" class="form-check-input" />
+            <label asp-for="IsFeatured" class="form-check-label"></label>
+            <span asp-validation-for="IsFeatured" class="text-danger"></span>
+        </div>
+        <div class="from-group">
+            <label asp-for="CategoryId"></label>
+            <select asp-for="CategoryId" class="form-control" asp-items="@selectListCategories">
+                <option value="">Select</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MainFile"></label>
+            <input asp-for="MainFile" accept="image/*" class="form-control-file" />
+            <span asp-validation-for="MainFile" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Images"></label>
+            <input asp-for="Images" accept="image/*" class="form-control-file" />
+            <span asp-validation-for="Images" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SmallDesc"></label>
+            <input asp-for="SmallDesc" class="form-control" placeholder="Enter small description" />
+            <span asp-validation-for="SmallDesc" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FullDesc"></label>
+            <textarea asp-for="FullDesc" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="FullDesc" class="text-danger"></span>
+        </div>
+        <div class="mt-3">
+            <a asp-area="Manage" asp-controller="Product" asp-action="Index" class="d-inline-block me-1 btn btn-primary">Go Back</a>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .catch(error => console.error(error));
+    </script>
+}

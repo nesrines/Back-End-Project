@@ -1,0 +1,36 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Product Details</h1>
+</div>
+
+<div class="card mb-3" style="width: 25rem;">
+    <img class="card-img-top" src="~/assets/img/@Model.MainImage" />
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title</h5>
+        <p>Category: @Model.Category?.Name</p>
+        <p>Original Price: @Model.Price.ToString("#.##") Discount: @Model.Discount%</p>
+        @if (Model.Discount > 0)
+        {
+            <p>Dicounted Price:@((Model.Price - Model.Price * Model.Discount / 100).ToString("#.##"))</p>
+        }
+        <p>Created by <b>@Model.CreatedBy</b> on <i>@Model.CreatedDate.ToString("yyyy / MM / dd")</i></p>
+        <p>
+            Last updated by <b>@(Model.UpdatedBy == null ? Model.CreatedBy : Model.UpdatedBy)</b> on
+            <i>@((Model.UpdatedDate == null ? Model.CreatedDate : ((DateTime)Model.UpdatedDate)).ToString("yyyy / MM / dd"))</i>
+        </p>
+    </div>
+</div>
+
+<div class="col-8">
+    @foreach (ProductImage productImage in Model.ProductImages)
+    {
+        <img class="col-2 me-2" style="width: 100px;" src="~/assets/img/product/@productImage.Image" />
+    }
+</div>
+
+<a asp-area="Manage" asp-controller="Product" asp-action="Index" class="d-inline-block me-1 mt-3 btn btn-primary">Go Back</a>

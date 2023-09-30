@@ -28,7 +28,7 @@
             <div class="header-top theme-bg">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-lg-6"><div class="welcome-message"><p>Welcome to Juan online store</p></div></div>
+                        <div class="col-lg-6"><div class="welcome-message"><p>@settings["HeaderMessage"]</p></div></div>
                         <div class="col-lg-6 text-right">
                             <div class="header-top-settings">
                                 <ul class="nav align-items-center justify-content-end">
@@ -50,7 +50,7 @@
                         <div class="col-lg-2">
                             <div class="logo">
                                 <a asp-controller="Home" asp-action="Index">
-                                    <img src="~/assets/img/logo/logo.png" alt="">
+                                    <img src="~/assets/img/logo/@settings["Logo"]" alt="">
                                 </a>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                         <div class="mobile-main-header">
                             <div class="mobile-logo">
                                 <a asp-controller="Home" asp-action="Index">
-                                    <img src="~/assets/img/logo/logo.png" alt="Brand Logo">
+                                    <img src="~/assets/img/logo/@settings["Logo"]" alt="Brand Logo">
                                 </a>
                             </div>
                             <div class="mobile-menu-toggler">
@@ -181,15 +181,12 @@
                 <div class="mobile-settings">
                     <ul class="nav">
                         <li>
-                            <div class="dropdown mobile-top-dropdown">
-                                <span id="currency">Currency</span>
-                            </div>
+                            <div class="dropdown mobile-top-dropdown"><span id="currency">Currency</span></div>
                         </li>
                         <li>
                             <div class="dropdown mobile-top-dropdown">
                                 <a href="#" class="dropdown-toggle" id="myaccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    My Account
-                                    <i class="fa fa-angle-down"></i>
+                                    My Account <i class="fa fa-angle-down"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="myaccount">
                                     <a class="dropdown-item" href="my-account.html">my account</a>
@@ -321,7 +318,7 @@
                 <div class="row">
                     <div class="col-md-6 order-2 order-md-1">
                         <div class="copyright-text text-center text-md-left">
-                            <p>Copyright 2019 <a asp-controller="Home" asp-action="Index">Juan</a>. All Rights Reserved</p>
+                            <p>@settings["FooterMessage"]</p>
                         </div>
                     </div>
                     <div class="col-md-6 order-1 order-md-2">
