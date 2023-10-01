@@ -19,7 +19,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //    .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromSeconds(10));
-
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ILayoutService, LayoutService>();
 
