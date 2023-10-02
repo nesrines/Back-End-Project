@@ -2,6 +2,7 @@
 public class PaginatedList<T> : List<T>
 {
     public int CurrentPage { get; }
+    public int MaxPages { get; }
     public bool HasPrev { get; }
     public bool HasNext { get; }
     public int Start { get; }
@@ -12,6 +13,7 @@ public class PaginatedList<T> : List<T>
     {
         if (totalPage < pageItemCount) pageItemCount = totalPage;
         CurrentPage = currentPage;
+        MaxPages = totalPage;
         ElementCount = elementCount;
         HasPrev = CurrentPage > 1;
         HasNext = CurrentPage < totalPage;

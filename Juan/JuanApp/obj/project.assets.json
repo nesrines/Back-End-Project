@@ -10948,19 +10948,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Atilla\\.nuget\\packages\\": {}
+    "C:\\Users\\nasrinfa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Atilla\\OneDrive\\İş masası\\Back-End-Project\\Juan\\JuanApp\\JuanApp.csproj",
+      "projectUniqueName": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\JuanApp.csproj",
       "projectName": "JuanApp",
-      "projectPath": "C:\\Users\\Atilla\\OneDrive\\İş masası\\Back-End-Project\\Juan\\JuanApp\\JuanApp.csproj",
-      "packagesPath": "C:\\Users\\Atilla\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Atilla\\OneDrive\\İş masası\\Back-End-Project\\Juan\\JuanApp\\obj\\",
+      "projectPath": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\JuanApp.csproj",
+      "packagesPath": "C:\\Users\\nasrinfa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Atilla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nasrinfa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10968,6 +10968,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -11036,7 +11037,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

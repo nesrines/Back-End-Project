@@ -1,0 +1,71 @@
+﻿@model Product
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body">
+    <div class="product-details-inner">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="product-large-slider mb-20">
+                    @foreach (ProductImage productImage in Model.ProductImages)
+                    {
+                        <div class="pro-large-img img-zoom">
+                            <img src="assets/img/product/@productImage.Image" alt="product thumb" />
+                        </div>
+                    }
+                </div>
+                <div class="pro-nav slick-row-5">
+                    @foreach (ProductImage productImage in Model.ProductImages)
+                    {
+                        <div class="pro-nav-thumb"><img src="assets/img/product/@productImage.Image" alt="" /></div>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="product-details-des">
+                    <h3 class="pro-det-title">@Model.Title</h3>
+                    <div class="pro-review">
+                        <span><a href="#">1 Review(s)</a></span>
+                    </div>
+                    <div class="price-box">
+                        @if (Model.Discount > 0)
+                        {
+                            <span class="price-regular">$@((Model.Price - Model.Price * Model.Discount / 100).ToString("#.##"))</span>
+                            <span class="price-old"><del>$@Model.Price.ToString("#.##")</del></span>
+                        }
+                        else { <span class="price-regular">$@Model.Price.ToString("#.##")</span> }
+                    </div>
+                    <p>@Model.SmallDesc</p>
+                    <div class="quantity-cart-box d-flex align-items-center mb-20">
+                        <div class="quantity">
+                            <div class="pro-qty">
+                                <span class="qty-btn">-</span>
+                                <input data-id="@Model.Id" type="text" value="1">
+                                <span class="inc qty-btn">+</span>
+                            </div>
+                        </div>
+                        @if (Model.Count > 0)
+                        {
+                            <a asp-controller="Basket" asp-action="AddBasket" asp-route-id="@Model.Id"
+                               class="btn btn-default basket-btn">Add To Cart</a>
+                        }
+                        else { <span class="btn btn-grey">Add To Cart</span> }
+                    </div>
+                    <div class="availability mb-20">
+                        <h5 class="cat-title">Availability:</h5>
+                        @if (Model.Count > 0) { <span>In Stock</span> }
+                        else { <span class="text-danger">Stock Out</span> }
+                    </div>
+                    <div class="share-icon">
+                        <h5 class="cat-title">Share:</h5>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

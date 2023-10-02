@@ -318,7 +318,7 @@
                 <div class="row">
                     <div class="col-md-6 order-2 order-md-1">
                         <div class="copyright-text text-center text-md-left">
-                            <p>@settings["FooterMessage"]</p>
+                            <p>@Html.Raw(settings["FooterMessage"])</p>
                         </div>
                     </div>
                     <div class="col-md-6 order-1 order-md-2">
@@ -416,5 +416,6 @@
     <script src="~/assets/js/vendor.js"></script>
     <script src="~/assets/js/plugins.js"></script>
     <script src="~/assets/js/active.js"></script>
+    <script src="~/assets/js/custom.js"></script>
 </body>
 </html>

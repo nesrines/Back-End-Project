@@ -1,4 +1,4 @@
-﻿@model PaginatedList<Product>
+﻿@model ShopVM
 
 <div class="breadcrumb-area bg-img" data-bg="~/assets/img/banner/breadcrumb-banner.jpg">
     <div class="container">
@@ -8,7 +8,7 @@
                     <nav aria-label="breadcrumb">
                         <h1 class="breadcrumb-title">shop</h1>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a asp-controller=Home asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">shop</li>
                         </ul>
                     </nav>
@@ -29,11 +29,14 @@
                         <div class="sidebar-title"><h3>Categories</h3></div>
                         <div class="sidebar-body">
                             <ul class="color-list">
-                                <li><a href="#">Mens <span>(10)</span></a></li>
-                                <li><a href="#">Womens <span>(05)</span></a></li>
-                                <li><a href="#">Sports <span>(15)</span></a></li>
-                                <li><a href="#">Fabric <span>(12)</span></a></li>
-                                <li><a href="#">Leather <span>(20)</span></a></li>
+                                @foreach (Category category in Model.Categories)
+                                {
+                                    if(category.Products != null && category.Products.Count() > 0)
+                                    {
+                                        <li><a asp-controller="Product" asp-action="Index" asp-route-id="@category.Id">
+                                            @category.Name <span>(@category.Products.Count())</span></a></li>
+                                    }
+                                }
                             </ul>
                         </div>
                     </div>
@@ -108,30 +111,30 @@
                     <!-- shop product top wrap start -->
 
                     <!-- product item list start -->
-                    <div class="shop-product-wrap grid-view row mbn-50">
-                        @await Html.PartialAsync("_LoadMorePartial", Model)
+                    <div id="productContainer" class="shop-product-wrap grid-view row mbn-50">
+                        @await Html.PartialAsync("_ProductsPartial", Model.Products)
                     </div>
                     <!-- product item list end -->
 
                     <!-- Load More Button-->
-                    <a id="loadMoreBtn" asp-controller="Product" asp-action="LoadMore" asp-route-pageIndex="@(Model.CurrentPage + 1)"
-                       data-maxPages="@ViewBag.MaxPages" class="btn btn-success d-flex py-2 mt-3">LOAD MORE</a>
+                    <a id="loadMoreBtn" asp-controller="Product" asp-action="LoadMore" asp-route-pageIndex="@(Model.Products.CurrentPage + 1)"
+                       data-maxPages="@Model.Products.MaxPages" class="btn btn-success d-flex py-2 mt-3">LOAD MORE</a>
                     <!-- Load More Button -->
 
                     <!-- start pagination area -->
                     <div class="paginatoin-area text-center mt-45">
                         <ul class="pagination-box">
-                            @if (Model.HasPrev)
+                            @if (Model.Products.HasPrev)
                             {
-                                <li><a asp-controller="Product" asp-action="Index" asp-route-currentPage="@(Model.CurrentPage - 1)"><i class="ion-ios-arrow-left"></i></a></li>
+                                <li><a asp-controller="Product" asp-action="Index" asp-route-currentPage="@(Model.Products.CurrentPage - 1)"><i class="ion-ios-arrow-left"></i></a></li>
                             }
-                            @for (int i = Model.Start; i <= Model.End; i++)
+                            @for (int i = Model.Products.Start; i <= Model.Products.End; i++)
                             {
-                                <li class="@(Model.CurrentPage == i ? "active" : "")"><a asp-controller="Product" asp-action="Index" asp-route-currentPage="@i">@i</a></li>
+                                <li class="@(Model.Products.CurrentPage == i ? "active" : "")"><a asp-controller="Product" asp-action="Index" asp-route-currentPage="@i">@i</a></li>
                             }
-                            @if (Model.HasNext)
+                            @if (Model.Products.HasNext)
                             {
-                                <li><a asp-controller="Product" asp-action="Index" asp-route-currentPage="@(Model.CurrentPage + 1)"><i class="ion-ios-arrow-right"></i></a></li>
+                                <li><a asp-controller="Product" asp-action="Index" asp-route-currentPage="@(Model.Products.CurrentPage + 1)"><i class="ion-ios-arrow-right"></i></a></li>
                             }
                         </ul>
                     </div>
@@ -142,3 +145,11 @@
         </div>
     </div>
 </div>
+
+<!-- Quick view modal start -->
+<div class="modal" id="quick_view">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content"></div>
+    </div>
+</div>
+<!-- Quick view modal end -->

@@ -45,7 +45,7 @@
             .then(data => $('.header-cart').html(data));
     });
 
-    $(document).on('click', '.product-remove', function (e) {
+    $(document).on('click', '.remove-btn', function (e) {
         e.preventDefault();
 
         fetch($(this).attr('href'))
@@ -53,12 +53,9 @@
             .then(data => {
                 $('.header-cart').html(data);
                 if (location.pathname == '/Basket') {
-                    fetch('Basket/UpdateCart')
+                    fetch('/Basket/UpdateCart')
                         .then(res => res.text())
-                        .then(data => {
-                            $('#basketContent').html(data);
-                            $('.product-remove').click(Remove());
-                        });
+                        .then(data => $('#basketContent').html(data));
                 }
             });
     });
@@ -66,7 +63,7 @@
     $('#loadMoreBtn').click(function (e) {
         e.preventDefault();
 
-        let pageIndex = $(this).data('pageindex');
+        let pageIndex = $(this).attr('href').split('=')[1];
         let maxPages = $(this).data('maxpages');
 
         if (pageIndex > 0 && pageIndex <= maxPages) {
@@ -74,52 +71,45 @@
                 .then(res => res.text())
                 .then(data => $("#productContainer").append(data));
 
-            $(this).data('pageindex', pageIndex + 1)
+            $(this).attr('href', $(this).attr('href').replace('=' + pageIndex, '=' + (pageIndex + 1)))
 
             if (pageIndex == maxPages) $(this).remove();
         }
     });
 
-    $(document).on('click', '.ext', function (e) {
-        e.preventDefault();
+    $(document).on('click', '.qty-btn', function () {
+        var qtyBtn = $(this);
+        var oldValue = $button.parent().find('input').val();
 
-        $(this).next().val($(this).next().val() - 1);
+        if (qtyBtn.hasClass('inc')) var newVal = oldValue > 1 ? parseFloat(oldValue) + 1 : 1;
+        else var newVal = oldValue > 1 ? parseFloat(oldValue) - 1 : 1;
 
-        fetch('Basket/ChangeCount?id=' + $(this).next().data('id') + '&count=' + $(this).next().val())
+        qtyBtn.parent().find('input').val(newVal);
+
+        fetch('Basket/ChangeCount?id=' + $(this).parent().find('input').data('id') + '&count=' + qtyBtn.parent().find('input').val())
             .then(res => res.text())
             .then(data => {
                 $('.header-cart').html(data);
-                fetch('Basket/UpdateCart')
-                    .then(res => res.text())
-                    .then(data => $('#basketContent').html(data));
+                if (location.pathname == '/Basket') {
+                    fetch('/Basket/UpdateCart')
+                        .then(res => res.text())
+                        .then(data => $('#basketContent').html(data));
+                }
             });
     });
 
-    $(document).on('click', '.add', function (e) {
-        e.preventDefault();
-
-        $(this).prev().val($(this).prev().val() + 1);
-
-        fetch('Basket/ChangeCount?id=' + $(this).prev().data('id') + '&count=' + $(this).prev().val())
-            .then(res => res.text())
-            .then(data => {
-                $('.header-cart').html(data);
-                fetch('Basket/UpdateCart')
-                    .then(res => res.text())
-                    .then(data => $('#basketContent').html(data));
-            });
-    });
-
-    $(document).on('change', '.basket-count', function (e) {
+    $(document).on('change', '.pro-qty input', function (e) {
         e.preventDefault();
 
         fetch('Basket/ChangeCount?id=' + $(this).data('id') + '&count=' + $(this).val())
             .then(res => res.text())
             .then(data => {
                 $('.header-cart').html(data);
-                fetch('Basket/UpdateCart')
-                    .then(res => res.text())
-                    .then(data => $('#basketContent').html(data));
+                if (location.pathname == '/Basket') {
+                    fetch('/Basket/UpdateCart')
+                        .then(res => res.text())
+                        .then(data => $('#basketContent').html(data));
+                }
             });
     });
 });
