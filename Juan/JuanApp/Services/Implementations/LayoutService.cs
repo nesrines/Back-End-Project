@@ -1,6 +1,7 @@
 ﻿using JuanApp.DataAccessLayer;
 using JuanApp.Models;
 using JuanApp.Services.Interfaces;
+using JuanApp.ViewModels.BasketVMs;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -15,21 +16,24 @@ public class LayoutService : ILayoutService
         _contextAccessor = contextAccessor;
     }
 
-    //public async Task<List<BasketVM>> GetBasketAsync()
-    //{
-    //    List<BasketVM> basketVMs = new List<BasketVM>();
-    //    string? cookie = _contextAccessor.HttpContext.Request.Cookies["basket"];
-    //    if (!string.IsNullOrWhiteSpace(cookie)) basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(cookie);
-    //    foreach (BasketVM basketVM in basketVMs)
-    //    {
-    //        Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.Id);
-    //        basketVM.Title = product.Title;
-    //        basketVM.Image = product.MainImage;
-    //        basketVM.Price = product.DiscountedPrice > 0 ? product.DiscountedPrice : product.Price;
-    //        basketVM.ExTax = product.ExTax;
-    //    }
-    //    return basketVMs;
-    //}
+    public async Task<List<BasketVM>> GetBasketAsync()
+    {
+        List<BasketVM> basketVMs = new List<BasketVM>();
+
+        string? cookie = _contextAccessor.HttpContext.Request.Cookies["basket"];
+
+        if (!string.IsNullOrWhiteSpace(cookie)) basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(cookie);
+
+        foreach (BasketVM basketVM in basketVMs)
+        {
+            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.Id);
+            basketVM.Title = product.Title;
+            basketVM.Image = product.MainImage;
+            basketVM.Price = product.Price - product.Price * product.Discount / 100;
+        }
+
+        return basketVMs;
+    }
 
     public async Task<Dictionary<string, string>> GetSettingsAsync()
     {
