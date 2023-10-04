@@ -163,7 +163,6 @@ public class ProductController : Controller
             dbProduct.MainImage = await product.MainFile.SaveAsync(_env.WebRootPath, "assets", "img", "product");
         }
 
-
         if (product.CategoryId == null || !await _context.Categories.AnyAsync(c => !c.IsDeleted && c.Id == product.CategoryId))
         {
             ModelState.AddModelError("CategoryId", "Invalid");
@@ -176,7 +175,7 @@ public class ProductController : Controller
             return View(product);
         }
 
-        if (product.Discount < 0 || product.Discount > product.Price)
+        if (product.Discount < 0 || product.Discount > 90)
         {
             ModelState.AddModelError("Discount", "Discount percentage cannot be less than 0 or more than 90.");
             return View(product);

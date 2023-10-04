@@ -11,7 +11,7 @@
 
 <div class="card mb-3" style="width: 25rem;">
     <div class="card-body">
-        <h5 class="card-title">@Model.Name</h5>
+        <h4 class="card-title">@Model.Name</h4>
         <p>Created by <b>@Model.CreatedBy</b> on <i>@Model.CreatedDate.ToString("yyyy / MM / dd")</i></p>
         <p>
             Last updated by <b>@(Model.UpdatedBy == null ? Model.CreatedBy : Model.UpdatedBy)</b> on
@@ -22,6 +22,7 @@
 
 @if (Model.Products != null && Model.Products.Count() > 0)
 {
+    <h4 class="mt-5">Products</h4>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -35,11 +36,11 @@
                 no++;
                 <tr>
                     <td>@no</td>
-                    <td>@product.Title</td>
+                    <td><a asp-area="Manage" asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">@product.Title</a></td>
                 </tr>
             }
         </tbody>
     </table>
 }
 
-<a asp-area="Manage" asp-controller="Category" asp-action="Index" class="d-inline-block me-1 mt-3 btn btn-primary">Go Back</a>
+<a asp-area="Manage" asp-controller="Category" asp-action="Index" class="d-inline-block me-1 mt-2 btn btn-primary">Go Back</a>

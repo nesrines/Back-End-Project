@@ -1,10 +1,11 @@
 ﻿@inject ILayoutService layoutService
 @{
+    IEnumerable<BasketVM> basketVMs = await layoutService.GetBasketAsync();
     Dictionary<string, string> settings = await layoutService.GetSettingsAsync();
 }
 
 <!DOCTYPE html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -185,8 +186,8 @@
                         </li>
                         <li>
                             <div class="dropdown mobile-top-dropdown">
-                                <a href="#" class="dropdown-toggle" id="myaccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    My Account <i class="fa fa-angle-down"></i>
+                                <a href="#" class="dropdown-toggle" id="myaccount" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">My Account <i class="fa fa-angle-down"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="myaccount">
                                     <a class="dropdown-item" href="my-account.html">my account</a>
@@ -205,19 +206,19 @@
                         <ul>
                             <li>
                                 <i class="fa fa-mobile"></i>
-                                <a href="#">0123456789</a>
+                                <a href="tel:@settings["Phone"]">@settings["Phone"]</a>
                             </li>
                             <li>
                                 <i class="fa fa-envelope-o"></i>
-                                <a href="#">info@yourdomain.com</a>
+                                <a href="mailto:@settings["E-mail"]">@settings["E-mail"]</a>
                             </li>
                         </ul>
                     </div>
                     <div class="off-canvas-social-widget">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="@settings["Facebook"]"><i class="fa fa-facebook"></i></a>
+                        <a href="@settings["Twitter"]"><i class="fa fa-twitter"></i></a>
                         <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="@settings["LinkedIn"]"><i class="fa fa-linkedin"></i></a>
                         <a href="#"><i class="fa fa-youtube-play"></i></a>
                     </div>
                 </div>
@@ -247,7 +248,7 @@
                                 <ul class="location-wrap">
                                     <li><i class="ion-ios-location-outline"></i>@settings["Address"]</li>
                                     <li><i class="ion-ios-email-outline"></i>Mail Us: <a href="mailto:@settings["E-mail"]">@settings["E-mail"]</a></li>
-                                    <li><i class="ion-ios-telephone-outline"></i>Phone: <a href="%2b0025425456554">@settings["Phone"]</a></li>
+                                    <li><i class="ion-ios-telephone-outline"></i>Phone: <a href="tel:@settings["Phone"]">@settings["Phone"]</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -323,10 +324,10 @@
                     </div>
                     <div class="col-md-6 order-1 order-md-2">
                         <div class="footer-social-link text-center text-md-right">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="@settings["Facebook"]"><i class="fa fa-facebook"></i></a>
+                            <a href="@settings["Twitter"]"><i class="fa fa-twitter"></i></a>
+                            <a href="@settings["LinkedIn"]"><i class="fa fa-linkedin"></i></a>
+                            <a href="@settings["Instagram"]"><i class="fa fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -345,8 +346,8 @@
             <div class="container">
                 <div class="offcanvas-search-box">
                     <form class="d-flex bdr-bottom w-100">
-                        <input type="text" placeholder="Search entire storage here...">
-                        <button class="search-btn"><i class="ion-ios-search-strong"></i>search</button>
+                        <input id="searchInput" type="text" placeholder="Search for products">
+                        <ul id="searchBody" style="position:absolute; z-index:999; width:100%; background-color:#fff; max-height:250px; overflow-y:scroll;"></ul>
                     </form>
                 </div>
             </div>
@@ -361,49 +362,7 @@
             <div class="minicart-inner-content">
                 <div class="minicart-close"><i class="ion-android-close"></i></div>
                 <div class="minicart-content-box">
-                    <div class="minicart-item-wrapper">
-                        <ul>
-                            <li class="minicart-item">
-                                <div class="minicart-thumb">
-                                    <a asp-controller="Product" asp-action="Details" asp-route-id=""><img src="~/assets/img/cart/cart-2.jpg" alt="product"></a>
-                                </div>
-                                <div class="minicart-content">
-                                    <h3 class="product-name">
-                                        <a asp-controller="Product" asp-action="Details" asp-route-id="">Jasmine flowers white for all flower lovers</a>
-                                    </h3>
-                                    <p>
-                                        <span class="cart-quantity">1 <strong>&times;</strong></span>
-                                        <span class="cart-price">$80.00</span>
-                                    </p>
-                                </div>
-                                <button class="minicart-remove"><i class="ion-android-close"></i></button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="minicart-pricing-box">
-                        <ul>
-                            <li>
-                                <span>sub-total</span>
-                                <span><strong>$300.00</strong></span>
-                            </li>
-                            <li>
-                                <span>Eco Tax (-2.00)</span>
-                                <span><strong>$10.00</strong></span>
-                            </li>
-                            <li>
-                                <span>VAT (20%)</span>
-                                <span><strong>$60.00</strong></span>
-                            </li>
-                            <li class="total">
-                                <span>total</span>
-                                <span><strong>$370.00</strong></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="minicart-button">
-                        <a asp-controller="Basket" asp-action="Index"><i class="fa fa-shopping-cart"></i> view cart</a>
-                        <a asp-controller="Checkout" asp-action="Index"><i class="fa fa-share"></i> checkout</a>
-                    </div>
+                    @await Html.PartialAsync("_BasketPartial", basketVMs)
                 </div>
             </div>
         </div>

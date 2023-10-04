@@ -116,25 +116,23 @@
                     </div>
                     <!-- product item list end -->
 
-                    <!-- Load More Button-->
-                    <a id="loadMoreBtn" asp-controller="Product" asp-action="LoadMore" asp-route-pageIndex="@(Model.Products.CurrentPage + 1)"
-                       data-maxPages="@Model.Products.MaxPages" class="btn btn-success d-flex py-2 mt-3">LOAD MORE</a>
-                    <!-- Load More Button -->
-
                     <!-- start pagination area -->
                     <div class="paginatoin-area text-center mt-45">
                         <ul class="pagination-box">
                             @if (Model.Products.HasPrev)
                             {
-                                <li><a asp-controller="Product" asp-action="Index" asp-route-currentPage="@(Model.Products.CurrentPage - 1)"><i class="ion-ios-arrow-left"></i></a></li>
+                                <li><a asp-controller="Product" asp-action="Index" asp-route-currentPage="@(Model.Products.CurrentPage - 1)">
+                                    <i class="ion-ios-arrow-left"></i></a></li>
                             }
                             @for (int i = Model.Products.Start; i <= Model.Products.End; i++)
                             {
-                                <li class="@(Model.Products.CurrentPage == i ? "active" : "")"><a asp-controller="Product" asp-action="Index" asp-route-currentPage="@i">@i</a></li>
+                                <li class="@(Model.Products.CurrentPage == i ? "active" : "")"><a asp-controller="Product" asp-action="Index"
+                                    asp-route-currentPage="@i">@i</a></li>
                             }
                             @if (Model.Products.HasNext)
                             {
-                                <li><a asp-controller="Product" asp-action="Index" asp-route-currentPage="@(Model.Products.CurrentPage + 1)"><i class="ion-ios-arrow-right"></i></a></li>
+                                <li><a asp-controller="Product" asp-action="Index" asp-route-currentPage="@(Model.Products.CurrentPage + 1)">
+                                    <i class="ion-ios-arrow-right"></i></a></li>
                             }
                         </ul>
                     </div>

@@ -48,18 +48,18 @@
                                 <div class="price-box">
                                     @if (Model.Discount > 0)
                                     {
-                                        <span class="price-regular">$@((Model.Price - Model.Price * Model.Discount / 100).ToString("#.##"))</span>
-                                        <span class="price-old"><del>$@Model.Price.ToString("#.##")</del></span>
+                                        <span class="price-regular">$@((Model.Price * (100 - Model.Discount) / 100).ToString("0.00"))</span>
+                                        <span class="price-old"><del>$@Model.Price.ToString("0.00")</del></span>
                                     }
-                                    else { <span class="regular-price">$@Model.Price.ToString("#.##")</span> }
+                                    else { <span class="regular-price">$@Model.Price.ToString("0.00")</span> }
                                 </div>
                                 <p>@Model.SmallDesc</p>
                                 <div class="quantity-cart-box d-flex align-items-center mb-20">
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <span class="qty-btn">-</span>
+                                            <span class="qtybtn">-</span>
                                             <input data-id="@Model.Id" type="text" value="1">
-                                            <span class="inc qty-btn">+</span>
+                                            <span class="inc qtybtn">+</span>
                                         </div>
                                     </div>
                                     @if (Model.Count > 0)
@@ -96,26 +96,7 @@
                                 </ul>
                                 <div class="tab-content reviews-tab">
                                     <div class="tab-pane fade show active" id="Description">
-                                        <div class="tab-one">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque.</p>
-                                            <div class="review-description">
-                                                <div class="tab-thumb">
-                                                    <img src="~/assets/img/about/services.jpg" alt="">
-                                                </div>
-                                                <div class="tab-des">
-                                                    <h3>Product Information :</h3>
-                                                    <ul>
-                                                        <li>Donec non est at libero vulputate rutrum</li>
-                                                        <li>Morbi ornare lectus quis justo gravida</li>
-                                                        <li>Pellentesque aliquet, sem eget laoreet</li>
-                                                        <li>Donec a neque libero</li>
-                                                        <li>Pellentesque aliquet, sem eget laoreet</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <p>Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue. Nunc facilisis sagittis ullamcorper.</p>
-                                            <p>Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt.</p>
-                                        </div>
+                                        @Html.Raw(Model.FullDesc)
                                     </div>
                                     <div class="tab-pane fade" id="Reviews">
                                         <form action="#" class="review-form">

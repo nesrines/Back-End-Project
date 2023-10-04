@@ -31,6 +31,11 @@ public class ProductController : Controller
         return View(shopVM);
     }
 
+    public async Task<IActionResult> CategoryFilter()
+    {
+        return View(nameof(Index));
+    }
+
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null) return BadRequest();
@@ -42,25 +47,6 @@ public class ProductController : Controller
         if (product == null) return NotFound();
 
         return View(product);
-    }
-
-    public async Task<IActionResult> LoadMore(int? id, int? pageIndex)
-    {
-        if (pageIndex == null || pageIndex <= 1) return BadRequest();
-
-        IQueryable<Product> products = _context.Products
-            .Where(p => !p.IsDeleted)
-            .OrderByDescending(p => p.Id);
-
-        if (id != null && await _context.Categories.AnyAsync(c => !c.IsDeleted && c.Id == id))
-            products = products.Where(p => p.CategoryId == id);
-
-        int MaxPage = (int)Math.Ceiling((decimal)products.Count() / 6);
-
-        if (pageIndex > MaxPage) return BadRequest();
-
-        products = products.Skip((int)(pageIndex - 1) * 6).Take(6);
-        return PartialView("_ProductsPartial", products);
     }
 
     public async Task<IActionResult> Modal(int? id)

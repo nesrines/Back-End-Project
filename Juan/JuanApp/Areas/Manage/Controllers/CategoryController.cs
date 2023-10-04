@@ -22,7 +22,7 @@ public class CategoryController : Controller
             .Include(c => c.Products.Where(p => !p.IsDeleted))
             .Where(c => !c.IsDeleted).OrderByDescending(c => c.Id);
 
-        return View(PaginatedList<Category>.Create(categories, currentPage, 5, 5));
+        return View(PaginatedList<Category>.Create(categories, currentPage, 10, 5));
     }
 
     public IActionResult Create()

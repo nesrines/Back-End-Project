@@ -28,15 +28,15 @@
                                 <div class="price-box">
                                     @if (product.Discount > 0)
                                     {
-                                        <span class="price-regular">$@((product.Price - product.Price * product.Discount / 100).ToString("#.##"))</span>
-                                        <span class="price-old"><del>$@product.Price.ToString("#.##")</del></span>
+                                        <span class="price-regular">$@((product.Price * (100 - product.Discount) / 100).ToString("0.00"))</span>
+                                        <span class="price-old"><del>$@product.Price.ToString("0.00")</del></span>
                                     }
-                                    else { <span class="price-regular">$@product.Price.ToString("#.##")</span> }
+                                    else { <span class="price-regular">$@product.Price.ToString("0.00")</span> }
                                 </div>
                                 <div class="product-action-link">
                                     <a href="#" data-toggle="tooltip" title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
                                     <a asp-controller="Basket" asp-action="AddBasket" asp-route-id="@product.Id" data-toggle="tooltip" title="Add To Cart"><i class="ion-bag"></i></a>
-                                    <a asp-controller="Product" asp-action="Modal" asp-route-id="@product.Id" data-toggle="modal" data-target="#quick_view">
+                                    <a asp-controller="Product" asp-action="Modal" asp-route-id="@product.Id" class="modal-btn" data-toggle="modal" data-target="#quick_view">
                                         <span data-toggle="tooltip" title="Quick View"><i class="ion-ios-eye-outline"></i></span>
                                     </a>
                                 </div>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BasketVM>
+
+<div class="minicart-item-wrapper">
+    <ul>
+        @foreach (BasketVM basketVM in Model)
+        {
+            <li class="minicart-item">
+                <div class="minicart-thumb">
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@basketVM.Id"><img src="~/assets/img/cart/@basketVM.Image" alt="product"></a>
+                 </div>
+                <div class="minicart-content">
+                    <h3 class="product-name"><a asp-controller="Product" asp-action="Details" asp-route-id="@basketVM.Id">@basketVM.Title</a></h3>
+                    <p>
+                        <span class="cart-quantity">@basketVM.Count <strong>&times;</strong></span>
+                        <span class="cart-price">$@basketVM.Price.ToString("0.00")</span>
+                    </p>
+                </div>
+                <a asp-controller="Basket" asp-action="RemoveBasket" asp-route-id="@basketVM.Id" class="minicart-remove"><i class="ion-android-close"></i></a>
+            </li>
+        }
+    </ul>
+</div>
+<div class="minicart-pricing-box">
+    <ul>
+        <li>
+            <span>sub-total</span>
+            <span><strong>$@Model.Sum(b => b.Price * b.Count).ToString("0.00")</strong></span>
+        </li>
+        <li>
+            <span>VAT (20%)</span>
+            <span><strong>$@Model.Sum(b => b.Price * b.Count * 0.2).ToString("0.00")</strong></span>
+        </li>
+        <li class="total">
+            <span>total</span>
+            <span><strong>$@Model.Sum(b => b.Price * b.Count * 1.2).ToString("0.00")</strong></span>
+        </li>
+    </ul>
+</div>
+<div class="minicart-button">
+    <a asp-controller="Basket" asp-action="Index"><i class="fa fa-shopping-cart"></i> view cart</a>
+    <a asp-controller="Checkout" asp-action="Index"><i class="fa fa-share"></i> checkout</a>
+</div>

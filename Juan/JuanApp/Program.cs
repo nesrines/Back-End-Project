@@ -15,14 +15,16 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
     options.User.RequireUniqueEmail = true;
     options.Password.RequiredLength = 8;
     options.Lockout.AllowedForNewUsers = false;
-})
-    .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+//builder.Services.Configure<SmtpSetting>(builder.Configuration.GetSection("smtpSetting"));
 builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromSeconds(10));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ILayoutService, LayoutService>();
 
 var app = builder.Build();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseStaticFiles();
 app.UseSession();
 

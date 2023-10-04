@@ -33,7 +33,7 @@
                 <td><a asp-area="Manage" asp-controller="Category" asp-action="Details"
                        asp-route-id="@product.CategoryId">@product.Category?.Name</a>
                 </td>
-                <td>@((product.Price - product.Price * product.Discount / 100).ToString("#.##"))</td>
+                <td>@((product.Price * (100 - product.Discount) / 100).ToString("0.00"))</td>
                 <td>@((product.UpdatedDate == null ? product.CreatedDate : (DateTime)product.UpdatedDate).ToString("yyyy / MM / dd"))</td>
                 <td>
                     <a asp-area="Manage" asp-controller="Product" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary">See details</a>

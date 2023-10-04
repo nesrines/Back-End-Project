@@ -22,7 +22,7 @@ public class BasketController : Controller
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.Id);
             basketVM.Title = product.Title;
             basketVM.Image = product.MainImage;
-            basketVM.Price = product.Price - product.Price * product.Discount / 100;
+            basketVM.Price = product.Price * (100 - product.Discount) / 100;
         }
 
         return View(basketVMs);
@@ -55,7 +55,7 @@ public class BasketController : Controller
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.Id);
             basketVM.Title = product.Title;
             basketVM.Image = product.MainImage;
-            basketVM.Price = product.Price - product.Price * product.Discount / 100;
+            basketVM.Price = product.Price * (100 - product.Discount) / 100;
         }
 
         return PartialView("_BasketPartial", basketVMs);
@@ -82,7 +82,7 @@ public class BasketController : Controller
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.Id);
             basketVM.Title = product.Title;
             basketVM.Image = product.MainImage;
-            basketVM.Price = product.Price - product.Price * product.Discount / 100;
+            basketVM.Price = product.Price * (100 - product.Discount) / 100;
         }
 
         return PartialView("_BasketPartial", basketVMs);
@@ -114,7 +114,7 @@ public class BasketController : Controller
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.Id);
             basketVM.Title = product.Title;
             basketVM.Image = product.MainImage;
-            basketVM.Price = product.Price - product.Price * product.Discount / 100;
+            basketVM.Price = product.Price * (100 - product.Discount) / 100;
         }
 
         return PartialView("_BasketPartial", basketVMs);
@@ -131,7 +131,7 @@ public class BasketController : Controller
             Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.Id);
             basketVM.Title = product.Title;
             basketVM.Image = product.MainImage;
-            basketVM.Price = product.Price - product.Price * product.Discount / 100;
+            basketVM.Price = product.Price * (100 - product.Discount) / 100;
         }
         return PartialView("_BasketPagePartial", basketVMs);
     }

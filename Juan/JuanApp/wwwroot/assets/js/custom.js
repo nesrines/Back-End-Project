@@ -17,24 +17,18 @@
             .then(res => res.text())
             .then(data => {
                 $('.modal-content').html(data);
-                $('.quick-view-image').slick({
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: false,
-                    dots: false,
+                $('.product-large-slider').slick({
                     fade: true,
-                    asNavFor: '.quick-view-thumb',
-                    speed: 400,
-                });
-                $('.quick-view-thumb').slick({
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                    asNavFor: '.quick-view-image',
-                    dots: false,
                     arrows: false,
-                    focusOnSelect: true,
-                    speed: 400,
+                    asNavFor: '.pro-nav'
                 });
+                $('.pro-nav').slick({
+                    slidesToShow: 4,
+                    asNavFor: '.product-large-slider',
+                    arrows: false,
+                    focusOnSelect: true
+                });
+                $('.img-zoom').zoom();
             });
     });
 
@@ -45,7 +39,7 @@
             .then(data => $('.header-cart').html(data));
     });
 
-    $(document).on('click', '.remove-btn', function (e) {
+    $(document).on('click', '.minicart-remove', function (e) {
         e.preventDefault();
 
         fetch($(this).attr('href'))
@@ -60,33 +54,14 @@
             });
     });
 
-    $('#loadMoreBtn').click(function (e) {
-        e.preventDefault();
-
-        let pageIndex = $(this).attr('href').split('=')[1];
-        let maxPages = $(this).data('maxpages');
-
-        if (pageIndex > 0 && pageIndex <= maxPages) {
-            fetch(($(this).attr('href') + '?pageIndex=' + pageIndex))
-                .then(res => res.text())
-                .then(data => $("#productContainer").append(data));
-
-            $(this).attr('href', $(this).attr('href').replace('=' + pageIndex, '=' + (pageIndex + 1)))
-
-            if (pageIndex == maxPages) $(this).remove();
-        }
-    });
-
-    $(document).on('click', '.qty-btn', function () {
+    $(document).on('click', '.qtybtn', function () {
         var qtyBtn = $(this);
-        var oldValue = $button.parent().find('input').val();
+        var value = $button.parent().find('input').val();
 
-        if (qtyBtn.hasClass('inc')) var newVal = oldValue > 1 ? parseFloat(oldValue) + 1 : 1;
-        else var newVal = oldValue > 1 ? parseFloat(oldValue) - 1 : 1;
+        if (qtyBtn.hasClass('inc')) qtyBtn.parent().find('input').val(value > 1 ? parseFloat(value) + 1 : 1);
+        else qtyBtn.parent().find('input').val(value > 1 ? parseFloat(value) - 1 : 1);;
 
-        qtyBtn.parent().find('input').val(newVal);
-
-        fetch('Basket/ChangeCount?id=' + $(this).parent().find('input').data('id') + '&count=' + qtyBtn.parent().find('input').val())
+        fetch('/Basket/ChangeCount?id=' + $(this).parent().find('input').data('id') + '&count=' + qtyBtn.parent().find('input').val())
             .then(res => res.text())
             .then(data => {
                 $('.header-cart').html(data);
@@ -101,7 +76,7 @@
     $(document).on('change', '.pro-qty input', function (e) {
         e.preventDefault();
 
-        fetch('Basket/ChangeCount?id=' + $(this).data('id') + '&count=' + $(this).val())
+        fetch('/Basket/ChangeCount?id=' + $(this).data('id') + '&count=' + $(this).val())
             .then(res => res.text())
             .then(data => {
                 $('.header-cart').html(data);
