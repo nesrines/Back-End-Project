@@ -10,13 +10,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
-//builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
-//{
-//    options.User.RequireUniqueEmail = true;
-//    options.Password.RequiredLength = 8;
-//    options.Lockout.AllowedForNewUsers = false;
-//})
-//    .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.User.RequireUniqueEmail = true;
+    options.Password.RequiredLength = 8;
+    options.Lockout.AllowedForNewUsers = false;
+})
+    .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromSeconds(10));
 builder.Services.AddHttpContextAccessor();

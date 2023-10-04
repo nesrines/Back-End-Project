@@ -10,7 +10,6 @@ public class ContactController : Controller
 
     public async Task<IActionResult> Index()
     {
-        Dictionary<string, string> settings = await _context.Settings.ToDictionaryAsync(s => s.Key, s => s.Value);
-        return View();
+        return View(await _context.Settings.ToDictionaryAsync(s => s.Key, s => s.Value));
     }
 }

@@ -28,9 +28,11 @@
             no++;
             <tr>
                 <td>@no</td>
-                <td><img style="width: 100px;" src="~/assets/images/product/@product.MainImage" /></td>
+                <td><img style="width: 100px;" src="~/assets/img/product/@product.MainImage" /></td>
                 <td>@product.Title</td>
-                <td>@product.Category?.Name</td>
+                <td><a asp-area="Manage" asp-controller="Category" asp-action="Details"
+                       asp-route-id="@product.CategoryId">@product.Category?.Name</a>
+                </td>
                 <td>@((product.Price - product.Price * product.Discount / 100).ToString("#.##"))</td>
                 <td>@((product.UpdatedDate == null ? product.CreatedDate : (DateTime)product.UpdatedDate).ToString("yyyy / MM / dd"))</td>
                 <td>

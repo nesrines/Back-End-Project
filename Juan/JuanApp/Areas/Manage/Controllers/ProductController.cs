@@ -38,7 +38,6 @@ public class ProductController : Controller
     {
         ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted).ToListAsync();
 
-        Console.WriteLine(ModelState.IsValid);
         if (!ModelState.IsValid) return View(product);
 
         if (product.CategoryId == null || !await _context.Categories.AnyAsync(c => !c.IsDeleted && c.Id == product.CategoryId))
@@ -46,7 +45,6 @@ public class ProductController : Controller
             ModelState.AddModelError("CategoryId", "Category is incorrect.");
             return View(product);
         }
-
 
         if (product.Images == null)
         {

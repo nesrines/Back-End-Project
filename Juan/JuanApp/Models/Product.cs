@@ -8,6 +8,7 @@ public class Product : BaseEntity
     [StringLength(100)]
     public string Title { get; set; }
     [Column(TypeName = "smallmoney")]
+    [Display(Name = "Price ($)")]
     public double Price { get; set; }
     [Display(Name = "Discount (%)")]
     public byte Discount { get ; set; }

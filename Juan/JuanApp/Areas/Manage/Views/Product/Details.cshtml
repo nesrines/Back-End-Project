@@ -9,14 +9,18 @@
 </div>
 
 <div class="card mb-3" style="width: 25rem;">
-    <img class="card-img-top" src="~/assets/img/@Model.MainImage" />
+    <img class="card-img-top" src="~/assets/img/product/@Model.MainImage" />
     <div class="card-body">
         <h5 class="card-title">@Model.Title</h5>
-        <p>Category: @Model.Category?.Name</p>
-        <p>Original Price: @Model.Price.ToString("#.##") Discount: @Model.Discount%</p>
+        <p>Category: <a asp-area="Manage" asp-controller="Category" asp-action="Details"
+                        asp-route-id="@Model.CategoryId">@Model.Category?.Name</a></p>
+        @if (Model.Count > 0) { <p class="text-success">In Stock: @Model.Count</p> }
+        else { <p class="text-danger">Stock Out</p> }
+        <p>Original Price: $@Model.Price.ToString("#.##")</p>
+        <p>Discount: @Model.Discount%</p>
         @if (Model.Discount > 0)
         {
-            <p>Dicounted Price:@((Model.Price - Model.Price * Model.Discount / 100).ToString("#.##"))</p>
+            <p>Dicounted Price: $@((Model.Price - Model.Price * Model.Discount / 100).ToString("#.##"))</p>
         }
         <p>Created by <b>@Model.CreatedBy</b> on <i>@Model.CreatedDate.ToString("yyyy / MM / dd")</i></p>
         <p>
