@@ -62,7 +62,7 @@ namespace JuanApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("JuanApp.Models.Product", b =>
@@ -133,7 +133,7 @@ namespace JuanApp.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("JuanApp.Models.ProductImage", b =>
@@ -181,7 +181,7 @@ namespace JuanApp.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("ProductImages", (string)null);
                 });
 
             modelBuilder.Entity("JuanApp.Models.Setting", b =>
@@ -204,7 +204,7 @@ namespace JuanApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings", (string)null);
                 });
 
             modelBuilder.Entity("JuanApp.Models.Slider", b =>
@@ -266,7 +266,7 @@ namespace JuanApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sliders");
+                    b.ToTable("Sliders", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -38,7 +38,7 @@
                             </td>
                             <td class="pro-subtotal"><span>@((basketVM.Price * basketVM.Count).ToString("0.00"))</span></td>
                             <td class="pro-remove">
-                                <a asp-controller="Basket" asp-action="RemoveBasket" asp-route-id="@basketVM.Id">
+                                <a class="minicart-remove" asp-controller="Basket" asp-action="RemoveBasket" asp-route-id="@basketVM.Id">
                                     <i class="fa fa-trash-o"></i>
                                 </a>
                             </td>

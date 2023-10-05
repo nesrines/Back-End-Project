@@ -19,7 +19,6 @@
     <link href="~/assets/css/style.css" rel="stylesheet">
     <script src="~/assets/js/modernizr-2.8.3.min.js"></script>
 </head>
-
 <body>
     <!-- Start Header Area -->
     <header class="header-area">
@@ -99,7 +98,7 @@
                                         <li>
                                             <a href="#" class="minicart-btn">
                                                 <i class="ion-bag"></i>
-                                                <div class="notification">2</div>
+                                                <div class="notification">@basketVMs.Count()</div>
                                             </a>
                                         </li>
                                     </ul>
@@ -116,7 +115,6 @@
 
         <!-- mobile header start -->
         <div class="mobile-header d-lg-none d-md-block sticky">
-            <!--mobile header top start -->
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-12">
@@ -127,22 +125,13 @@
                                 </a>
                             </div>
                             <div class="mobile-menu-toggler">
-                                <div class="mini-cart-wrap">
-                                    <a asp-controller="Basket" asp-action="Index">
-                                        <i class="ion-bag"></i>
-                                    </a>
-                                </div>
-                                <div class="mobile-menu-btn">
-                                    <div class="off-canvas-btn">
-                                        <i class="ion-navicon"></i>
-                                    </div>
-                                </div>
+                                <div class="mini-cart-wrap"><a asp-controller="Basket" asp-action="Index"><i class="ion-bag"></i> </a></div>
+                                <div class="mobile-menu-btn"><div class="off-canvas-btn"><i class="ion-navicon"></i></div></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- mobile header top start -->
         </div>
         <!-- mobile header end -->
     </header>
@@ -182,9 +171,6 @@
                 <div class="mobile-settings">
                     <ul class="nav">
                         <li>
-                            <div class="dropdown mobile-top-dropdown"><span id="currency">Currency</span></div>
-                        </li>
-                        <li>
                             <div class="dropdown mobile-top-dropdown">
                                 <a href="#" class="dropdown-toggle" id="myaccount" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">My Account <i class="fa fa-angle-down"></i>
@@ -204,12 +190,10 @@
                 <div class="offcanvas-widget-area">
                     <div class="off-canvas-contact-widget">
                         <ul>
-                            <li>
-                                <i class="fa fa-mobile"></i>
+                            <li><i class="fa fa-mobile"></i>
                                 <a href="tel:@settings["Phone"]">@settings["Phone"]</a>
                             </li>
-                            <li>
-                                <i class="fa fa-envelope-o"></i>
+                            <li><i class="fa fa-envelope-o"></i>
                                 <a href="mailto:@settings["E-mail"]">@settings["E-mail"]</a>
                             </li>
                         </ul>
@@ -217,9 +201,9 @@
                     <div class="off-canvas-social-widget">
                         <a href="@settings["Facebook"]"><i class="fa fa-facebook"></i></a>
                         <a href="@settings["Twitter"]"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                        <a href="@settings["Pinterest"]"><i class="fa fa-pinterest-p"></i></a>
                         <a href="@settings["LinkedIn"]"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        <a href="@settings["YouTube"]"><i class="fa fa-youtube-play"></i></a>
                     </div>
                 </div>
                 <!-- offcanvas widget area end -->
@@ -371,7 +355,7 @@
 
     <div class="scroll-top not-visible"><i class="fa fa-angle-up"></i></div>
 
-    <!--=======================Javascript============================-->
+    <!--===============Javascript===============-->
     <script src="~/assets/js/vendor.js"></script>
     <script src="~/assets/js/plugins.js"></script>
     <script src="~/assets/js/active.js"></script>

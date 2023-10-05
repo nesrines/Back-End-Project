@@ -6,8 +6,8 @@
         {
             <li class="minicart-item">
                 <div class="minicart-thumb">
-                    <a asp-controller="Product" asp-action="Details" asp-route-id="@basketVM.Id"><img src="~/assets/img/cart/@basketVM.Image" alt="product"></a>
-                 </div>
+                    <a asp-controller="Product" asp-action="Details" asp-route-id="@basketVM.Id"><img src="~/assets/img/product/@basketVM.Image" alt="product"></a>
+                </div>
                 <div class="minicart-content">
                     <h3 class="product-name"><a asp-controller="Product" asp-action="Details" asp-route-id="@basketVM.Id">@basketVM.Title</a></h3>
                     <p>

@@ -169,14 +169,6 @@
       "PackagePath": "staticwebassets\\assets\\img\\brand\\br5.png"
     },
     {
-      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\cart\\cart-1.jpg",
-      "PackagePath": "staticwebassets\\assets\\img\\cart\\cart-1.jpg"
-    },
-    {
-      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\cart\\cart-2.jpg",
-      "PackagePath": "staticwebassets\\assets\\img\\cart\\cart-2.jpg"
-    },
-    {
       "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\favicon.ico",
       "PackagePath": "staticwebassets\\assets\\img\\favicon.ico"
     },
@@ -187,10 +179,6 @@
     {
       "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\icon\\en.png",
       "PackagePath": "staticwebassets\\assets\\img\\icon\\en.png"
-    },
-    {
-      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\icon\\fr.png",
-      "PackagePath": "staticwebassets\\assets\\img\\icon\\fr.png"
     },
     {
       "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\icon\\policy-1.png",
@@ -307,6 +295,110 @@
     {
       "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231004162016551.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\product\\20231004162016551.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005161244049.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005161244049.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005161244053.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005161244053.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005161244054.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005161244054.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005161244055.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005161244055.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005161244056.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005161244056.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005161244057.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005161244057.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005161446456.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005161446456.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005161908420.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005161908420.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005161908421.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005161908421.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005161908422.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005161908422.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005161908424.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005161908424.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005162608894.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005162608894.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005162608895.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005162608895.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005162608896.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005162608896.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005162608897.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005162608897.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005163029919.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005163029919.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005163029921.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005163029921.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005163029923.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005163029923.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005163029924.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005163029924.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005163029925.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005163029925.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005163029926.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005163029926.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005164205692.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005164205692.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005164205693.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005164205693.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005164205695.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005164205695.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005164205696.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005164205696.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\20231005164205698.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\product\\20231005164205698.jpg"
     },
     {
       "Id": "C:\\Users\\nasrinfa\\Desktop\\Back-End-Project\\Juan\\JuanApp\\wwwroot\\assets\\img\\product\\pro-small-1.jpg",

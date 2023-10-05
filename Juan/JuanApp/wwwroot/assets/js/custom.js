@@ -36,7 +36,7 @@
         e.preventDefault();
         fetch($(this).attr('href'))
             .then(res => res.text())
-            .then(data => $('.header-cart').html(data));
+            .then(data => $('.minicart-content-box').html(data));
     });
 
     $(document).on('click', '.minicart-remove', function (e) {
@@ -45,7 +45,7 @@
         fetch($(this).attr('href'))
             .then(res => res.text())
             .then(data => {
-                $('.header-cart').html(data);
+                $('.minicart-content-box').html(data);
                 if (location.pathname == '/Basket') {
                     fetch('/Basket/UpdateCart')
                         .then(res => res.text())
