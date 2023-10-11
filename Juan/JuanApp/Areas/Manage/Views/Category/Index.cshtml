@@ -7,7 +7,11 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Categories</h1>
-    <a asp-area="Manage" asp-controller="Category" asp-action="Create" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">+ Create</a>
+    @if (User.IsInRole("SuperAdmin"))
+    {
+        <a asp-area="Manage" asp-controller="Category" asp-action="Create"
+           class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">+ Create</a>
+    }
 </div>
 
 <table class="table table-bordered table-striped">
@@ -31,8 +35,11 @@
                 <td>@((category.UpdatedDate == null ? category.CreatedDate : (DateTime)category.UpdatedDate).ToString("yyyy / MM / dd"))</td>
                 <td>
                     <a asp-area="Manage" asp-controller="Category" asp-action="Details" asp-route-id="@category.Id" class="btn btn-primary">See details</a>
-                    <a asp-area="Manage" asp-controller="Category" asp-action="Update" asp-route-id="@category.Id" class="btn btn-warning">Update</a>
-                    <a asp-area="Manage" asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger">Delete</a>
+                    @if (User.IsInRole("SuperAdmin"))
+                    {
+                        <a asp-area="Manage" asp-controller="Category" asp-action="Update" asp-route-id="@category.Id" class="btn btn-warning">Update</a>
+                        <a asp-area="Manage" asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger">Delete</a>
+                    }
                 </td>
             </tr>
         }

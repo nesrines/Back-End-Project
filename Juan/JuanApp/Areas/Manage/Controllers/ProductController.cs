@@ -1,12 +1,5 @@
-﻿using JuanApp.DataAccessLayer;
-using JuanApp.Helpers;
-using JuanApp.Models;
-using JuanApp.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace JuanApp.Areas.Manage.Controllers;
-[Area("manage")]
+﻿namespace JuanApp.Areas.Manage.Controllers;
+[Area("manage"), Authorize(Roles = "Admin, SuperAdmin")]
 public class ProductController : Controller
 {
     private readonly AppDbContext _context;
@@ -33,7 +26,7 @@ public class ProductController : Controller
         return View();
     }
 
-    [HttpPost]
+    [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Product product)
     {
         ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted).ToListAsync();
@@ -58,18 +51,11 @@ public class ProductController : Controller
             return View(product);
         }
 
-        product.ProductImages = new();
-        foreach (IFormFile file in product.Images)
-        {
-            product.ProductImages.Add(new ProductImage { Image = await file.SaveAsync(_env.WebRootPath, "assets", "img", "product") });
-        }
-
         if (product.MainFile == null)
         {
             ModelState.AddModelError("MainFile", "Required.");
             return View(product);
         }
-        else product.MainImage = await product.MainFile.SaveAsync(_env.WebRootPath, "assets", "img", "product");
 
         if (product.Price <= 0)
         {
@@ -89,6 +75,12 @@ public class ProductController : Controller
             return View(product);
         }
 
+        product.MainImage = await product.MainFile.SaveAsync(_env.WebRootPath, "assets", "img", "product");
+        product.ProductImages = new();
+        foreach (IFormFile file in product.Images)
+            product.ProductImages.Add(new ProductImage { Image = await file.SaveAsync(_env.WebRootPath, "assets", "img", "product") });
+
+        product.CreatedBy = User.Identity.Name;
         await _context.Products.AddAsync(product);
         await _context.SaveChangesAsync();
 
@@ -124,7 +116,7 @@ public class ProductController : Controller
         return View(product);
     }
 
-    [HttpPost]
+    [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(int? id, Product product)
     {
         ViewBag.Categories = await _context.Categories.Where(c => !c.IsDeleted).ToListAsync();
@@ -141,27 +133,6 @@ public class ProductController : Controller
         product.ProductImages = dbProduct.ProductImages;
 
         if (!ModelState.IsValid) return View(product);
-
-        if (product.Images != null)
-        {
-            int canUpload = 10 - dbProduct.ProductImages.Count();
-            if (product.Images.Count() > canUpload)
-            {
-                ModelState.AddModelError("Files", $"You can only upload {canUpload} more files.");
-                return View(product);
-            }
-            foreach (IFormFile file in product.Images)
-            {
-                dbProduct.ProductImages.Add(new ProductImage { Image = await file.SaveAsync(_env.WebRootPath, "assets", "img", "product") });
-            }
-        }
-
-        if (product.MainFile != null)
-        {
-            string filePath = Path.Combine(_env.WebRootPath, "assets", "img", "product", dbProduct.MainImage);
-            if (System.IO.File.Exists(filePath)) System.IO.File.Delete(filePath);
-            dbProduct.MainImage = await product.MainFile.SaveAsync(_env.WebRootPath, "assets", "img", "product");
-        }
 
         if (product.CategoryId == null || !await _context.Categories.AnyAsync(c => !c.IsDeleted && c.Id == product.CategoryId))
         {
@@ -195,8 +166,29 @@ public class ProductController : Controller
         dbProduct.FullDesc = product.FullDesc;
         dbProduct.IsFeatured = product.IsFeatured;
         dbProduct.CategoryId = product.CategoryId;
-        dbProduct.UpdatedBy = "User";
+        dbProduct.UpdatedBy = User.Identity.Name;
         dbProduct.UpdatedDate = DateTime.UtcNow.AddHours(4);
+
+        if (product.MainFile != null)
+        {
+            string filePath = Path.Combine(_env.WebRootPath, "assets", "img", "product", dbProduct.MainImage);
+            if (System.IO.File.Exists(filePath)) System.IO.File.Delete(filePath);
+            dbProduct.MainImage = await product.MainFile.SaveAsync(_env.WebRootPath, "assets", "img", "product");
+        }
+
+        if (product.Images != null)
+        {
+            int canUpload = 10 - dbProduct.ProductImages.Count();
+            if (product.Images.Count() > canUpload)
+            {
+                ModelState.AddModelError("Files", $"You can only upload {canUpload} more files.");
+                return View(product);
+            }
+            foreach (IFormFile file in product.Images)
+            {
+                dbProduct.ProductImages.Add(new ProductImage { Image = await file.SaveAsync(_env.WebRootPath, "assets", "img", "product") });
+            }
+        }
 
         await _context.SaveChangesAsync();
 
@@ -257,6 +249,8 @@ public class ProductController : Controller
         if (product == null) return NotFound();
 
         product.IsDeleted = true;
+        product.DeletedBy = User.Identity.Name;
+        product.DeletedDate = DateTime.UtcNow.AddHours(4);
 
         string filePath = Path.Combine(_env.WebRootPath, "assets", "img", "product", product.MainImage);
         if (System.IO.File.Exists(filePath)) System.IO.File.Delete(filePath);

@@ -776,3 +776,4 @@ C:\Users\Atilla\OneDrive\İş masası\Back-End-Project\Juan\JuanApp\obj\Debug\ne
 C:\Users\Atilla\OneDrive\İş masası\Back-End-Project\Juan\JuanApp\obj\Debug\net6.0\JuanApp.genruntimeconfig.cache
 C:\Users\Atilla\OneDrive\İş masası\Back-End-Project\Juan\JuanApp\obj\Debug\net6.0\ref\JuanApp.dll
 C:\Users\nasrinfa\Desktop\Back-End-Project\Juan\JuanApp\bin\Debug\net6.0\MailKit.dll
+C:\Users\Atilla\OneDrive\İş masası\Back-End-Project\Juan\JuanApp\bin\Debug\net6.0\MailKit.dll

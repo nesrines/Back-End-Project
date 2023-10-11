@@ -1,0 +1,41 @@
+﻿@model PaginatedList<AppUser>
+@{
+    ViewData["Title"] = "Users";
+    int no = (Model.CurrentPage - 1) * Model.ElementCount;
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Users</h1>
+    <a asp-area="Manage" asp-controller="User" asp-action="Create" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">+ Create</a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Role(s)</th>
+            <th>Settings</th>
+        </tr>
+    </thead>
+    <tbody id="userContainer">
+        @await Html.PartialAsync("_UsersPartial", Model)
+    </tbody>
+</table>
+
+<ul class="justify-content-center pagination">
+    @if (Model.HasPrev)
+    {
+        <li class="page-item"><a asp-area="Manage" asp-controller="User" asp-action="Index" asp-route-currentPage="@(Model.CurrentPage - 1)" class="page-link">Previous</a></li>
+    }
+    @for (int i = Model.Start; i <= Model.End; i++)
+    {
+        <li class="page-item @(i == Model.CurrentPage ? "active" : "")"><a class="page-link" asp-area="Manage" asp-controller="User" asp-action="Index" asp-route-currentPage="@i">@i</a></li>
+    }
+    @if (Model.HasNext)
+    {
+        <li class="page-item"><a asp-area="Manage" asp-controller="User" asp-action="Index" asp-route-currentPage="@(Model.CurrentPage + 1)" class="page-link">Next</a></li>
+    }
+</ul>

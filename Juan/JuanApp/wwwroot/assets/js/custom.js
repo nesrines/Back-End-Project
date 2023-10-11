@@ -1,4 +1,50 @@
 ﻿$(document).ready(function () {
+    let infoInput = $('#infoToaster').val();
+    if (infoInput.length > 0) toastr["info"](infoInput);
+
+    let successInput = $('#successToaster').val();
+    if (successInput.length > 0) toastr["success"](successInput);
+
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    $('.add-address-btn').click(function (e) {
+        e.preventDefault();
+        $('#addressForm').removeClass('d-none');
+        $('#addressContainer').addClass('d-none');
+    });
+
+    $('.go-back-btn').click(function (e) {
+        e.preventDefault();
+        $('#addressForm').addClass('d-none');
+        $('#addressContainer').removeClass('d-none');
+    });
+
+    $('.edit-btn').click(function (e) {
+        e.preventDefault();
+        $('#addressForm').removeClass('d-none');
+        $('#addressContainer').addClass('d-none');
+
+        fetch($(this).attr('href'))
+            .then(res => res.text())
+            .then(data => $('#addressForm').html(data))
+    });
+
     $('#searchInput').keyup(function (e) {
         e.preventDefault();
         let categoryId = $('#categoryId').val();
@@ -36,7 +82,12 @@
         e.preventDefault();
         fetch($(this).attr('href'))
             .then(res => res.text())
-            .then(data => $('.minicart-content-box').html(data));
+            .then(data => {
+                $('.minicart-content-box').html(data);
+
+                fetch('/Basket/UpdateCount').then(res => res.text())
+                    .then(data => $('.notification').html(data));
+            });
     });
 
     $(document).on('click', '.minicart-remove', function (e) {
@@ -46,44 +97,25 @@
             .then(res => res.text())
             .then(data => {
                 $('.minicart-content-box').html(data);
+
+                fetch('/Basket/UpdateCount').then(res => res.text())
+                    .then(data => $('.notification').html(data));
+
                 if (location.pathname == '/Basket') {
-                    fetch('/Basket/UpdateCart')
-                        .then(res => res.text())
-                        .then(data => $('#basketContent').html(data));
+                    fetch('/Basket/UpdateCart').then(res => res.text())
+                        .then(data => $('#basketContainer').html(data));
                 }
             });
     });
 
     $(document).on('click', '.qtybtn', function () {
-        var qtyBtn = $(this);
-        var value = $button.parent().find('input').val();
-
-        if (qtyBtn.hasClass('inc')) qtyBtn.parent().find('input').val(value > 1 ? parseFloat(value) + 1 : 1);
-        else qtyBtn.parent().find('input').val(value > 1 ? parseFloat(value) - 1 : 1);;
-
-        fetch('/Basket/ChangeCount?id=' + $(this).parent().find('input').data('id') + '&count=' + qtyBtn.parent().find('input').val())
+        fetch(`/Basket/Count${$(this).hasClass('inc') ? 'Inc' : 'Dec'}` + $(this).parent().find('input').data('id'))
             .then(res => res.text())
             .then(data => {
-                $('.header-cart').html(data);
+                $('.minicart-content-box').html(data);
                 if (location.pathname == '/Basket') {
-                    fetch('/Basket/UpdateCart')
-                        .then(res => res.text())
-                        .then(data => $('#basketContent').html(data));
-                }
-            });
-    });
-
-    $(document).on('change', '.pro-qty input', function (e) {
-        e.preventDefault();
-
-        fetch('/Basket/ChangeCount?id=' + $(this).data('id') + '&count=' + $(this).val())
-            .then(res => res.text())
-            .then(data => {
-                $('.header-cart').html(data);
-                if (location.pathname == '/Basket') {
-                    fetch('/Basket/UpdateCart')
-                        .then(res => res.text())
-                        .then(data => $('#basketContent').html(data));
+                    fetch('/Basket/UpdateCart').then(res => res.text())
+                        .then(data => $('#basketContainer').html(data));
                 }
             });
     });

@@ -12,14 +12,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="meta description">
     <title>Juan - Shoes Store HTML Template</title>
-
     <link rel="shortcut icon" href="~/assets/img/favicon.ico" type="image/x-icon" />
-    <link href="~/assets/css/plugins.css" rel="stylesheet">
-    <link href="~/assets/css/vendor.css" rel="stylesheet">
-    <link href="~/assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/plugins.css">
+    <link rel="stylesheet" href="~/assets/css/vendor.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <script src="~/assets/js/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
+    @if (TempData["Info"] != null) { <input type="hidden" value="@TempData["Info"]?.ToString()" id="infoToaster" /> }
+    @if (TempData["Success"] != null) { <input type="hidden" value="@TempData["Success"]?.ToString()" id="successToaster" /> }
+
     <!-- Start Header Area -->
     <header class="header-area">
         <!-- main header start -->
@@ -90,9 +93,16 @@
                                                 <i class="ion-ios-gear-outline"></i>
                                             </a>
                                             <ul class="dropdown-list">
-                                                <li><a href="login-register.html">login</a></li>
-                                                <li><a href="login-register.html">register</a></li>
-                                                <li><a href="my-account.html">my account</a></li>
+                                                @if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+                                                {
+                                                    <li><a asp-controller="Account" asp-action="Profile">my account</a></li>
+                                                    <li><a asp-controller="Account" asp-action="Logout">sign out</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li><a asp-controller="Account" asp-action="Login">sign in</a></li>
+                                                    <li><a asp-controller="Account" asp-action="Register">sign up</a></li>
+                                                }
                                             </ul>
                                         </li>
                                         <li>
@@ -173,12 +183,19 @@
                         <li>
                             <div class="dropdown mobile-top-dropdown">
                                 <a href="#" class="dropdown-toggle" id="myaccount" data-toggle="dropdown" aria-haspopup="true"
-                                   aria-expanded="false">My Account <i class="fa fa-angle-down"></i>
+                                   aria-expanded="false">Account <i class="fa fa-angle-down"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="myaccount">
-                                    <a class="dropdown-item" href="my-account.html">my account</a>
-                                    <a class="dropdown-item" href="login-register.html"> login</a>
-                                    <a class="dropdown-item" href="login-register.html">register</a>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Member"))
+                                    {
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="Profile">my account</a>
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="Logout">sign out</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="Login">sign in</a>
+                                        <a class="dropdown-item" asp-controller="Account" asp-action="Register">sign up</a>
+                                    }
                                 </div>
                             </div>
                         </li>
@@ -190,12 +207,8 @@
                 <div class="offcanvas-widget-area">
                     <div class="off-canvas-contact-widget">
                         <ul>
-                            <li><i class="fa fa-mobile"></i>
-                                <a href="tel:@settings["Phone"]">@settings["Phone"]</a>
-                            </li>
-                            <li><i class="fa fa-envelope-o"></i>
-                                <a href="mailto:@settings["E-mail"]">@settings["E-mail"]</a>
-                            </li>
+                            <li><i class="fa fa-mobile"></i><a href="tel:@settings["Phone"]">@settings["Phone"]</a></li>
+                            <li><i class="fa fa-envelope-o"></i><a href="mailto:@settings["E-mail"]">@settings["E-mail"]</a></li>
                         </ul>
                     </div>
                     <div class="off-canvas-social-widget">
@@ -282,7 +295,7 @@
                             <div class="widget-body">
                                 <ul class="useful-link">
                                     <li><a href="#">Store Location</a></li>
-                                    <li><a href="#">My Account</a></li>
+                                    <li><a asp-controller="Account" asp-action="@(User.Identity.IsAuthenticated ? "Profile" : "Login")">My Account</a></li>
                                     <li><a href="#">Orders Tracking</a></li>
                                     <li><a href="#">Size Guide</a></li>
                                     <li><a href="#">Shopping Rates</a></li>
@@ -359,6 +372,8 @@
     <script src="~/assets/js/vendor.js"></script>
     <script src="~/assets/js/plugins.js"></script>
     <script src="~/assets/js/active.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="~/assets/js/custom.js"></script>
+    @RenderSection("Scripts", false)
 </body>
 </html>

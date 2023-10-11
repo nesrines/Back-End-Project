@@ -1,11 +1,4 @@
-﻿using JuanApp.DataAccessLayer;
-using JuanApp.Models;
-using JuanApp.ViewModels;
-using JuanApp.ViewModels.ShopVMs;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace JuanApp.Controllers;
+﻿namespace JuanApp.Controllers;
 public class ProductController : Controller
 {
     private readonly AppDbContext _context;

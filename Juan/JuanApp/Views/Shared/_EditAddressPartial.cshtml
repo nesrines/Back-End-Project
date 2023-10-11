@@ -1,0 +1,49 @@
+﻿@model Address
+
+<h3>Edit Address</h3>
+<form method="post" asp-controller="Account" asp-action="EditAddress">
+    <div class="row">
+        <div class="col-lg-6 single-input-item">
+            <label asp-for="Country" class="required"></label>
+            <input asp-for="Country" placeholder="Country" />
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+        <div class="col-lg-6 single-input-item">
+            <label asp-for="TownCity" class="required"></label>
+            <input asp-for="TownCity" placeholder="Town / City" />
+            <span asp-validation-for="TownCity" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 single-input-item">
+            <label asp-for="Line1" class="required"></label>
+            <input asp-for="Line1" placeholder="Street address Line 1" />
+            <span asp-validation-for="Line1" class="text-danger"></span>
+        </div>
+        <div class="col-lg-6 single-input-item">
+            <label asp-for="Line2" class="required"></label>
+            <input asp-for="Line2" placeholder="Street address Line 2" />
+            <span asp-validation-for="Line2" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 single-input-item">
+            <label asp-for="ZipCode" class="required"></label>
+            <input asp-for="ZipCode" placeholder="PostCode / Zip" />
+            <span asp-validation-for="ZipCode" class="text-danger"></span>
+        </div>
+        <div class="col-lg-6 single-input-item">
+            <div class="custom-control custom-checkbox mt-5 ml-3">
+                <input asp-for="IsDefault" class="custom-control-input">
+                <label asp-for="IsDefault" class="custom-control-label">Set as Default</label>
+            </div>
+        </div>
+    </div>
+    <div class="single-input-item">
+        <button type="submit" class="check-btn sqr-btn btn">Save Changes</button>
+    </div>
+</form>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationPartial")
+}

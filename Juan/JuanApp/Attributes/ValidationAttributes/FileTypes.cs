@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace JuanApp.Attributes.ValidationAttributes;
+﻿namespace JuanApp.Attributes.ValidationAttributes;
 public class FileTypes : ValidationAttribute
 {
     private readonly string[] _fileTypes;

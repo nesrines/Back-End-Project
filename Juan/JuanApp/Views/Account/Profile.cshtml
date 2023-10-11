@@ -1,0 +1,135 @@
+﻿@model ProfilePageVM
+
+<div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap text-center">
+                    <nav aria-label="breadcrumb">
+                        <h1 class="breadcrumb-title">My Account</h1>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-account-wrapper section-padding">
+    <div class="container custom-container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="myaccount-page-wrapper">
+                    <div class="row">
+                        <!-- My Account Tab Menu Start -->
+                        <div class="col-lg-3 col-md-4">
+                            <div class="myaccount-tab-menu nav" role="tablist">
+                                <a href="#account-info" class="@(TempData["Tab"] == null ? "active" : "")"
+                                   data-toggle="tab"><i class="fa fa-user"></i> Account Details</a>
+                                <a href="#address-edit" class="@(TempData["Tab"]?.ToString() == "Address" ? "active" : "")"
+                                   data-toggle="tab"><i class="fa fa-map-marker"></i> Addresses</a>
+                                <a href="#orders" class="@(TempData["Tab"]?.ToString() == "Orders" ? "active" : "")"
+                                   data-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Orders</a>
+                                <a asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out"></i> Logout</a>
+                            </div>
+                        </div>
+                        <!-- My Account Tab Menu End -->
+
+                        <!-- My Account Tab Content Start -->
+                        <div class="col-lg-9 col-md-8">
+                            <div class="tab-content" id="myaccountContent">
+                                <!-- Single Tab Content Start -->
+                                <div class="tab-pane fade @(TempData["Tab"] == null ? "show active" : "")" id="account-info" role="tabpanel">
+                                    @await Html.PartialAsync("_ProfilePartial", Model.ProfileVM)
+                                </div>
+                                <!-- Single Tab Content End -->
+
+                                <!-- Single Tab Content Start -->
+                                <div class="tab-pane fade @(TempData["Tab"]?.ToString() == "Address" ? "show active" : "")" id="address-edit" role="tabpanel">
+                                    <div class="myaccount-content">
+                                        <div id="addressForm" class="@(TempData["AddressForm"]?.ToString() == null ? "d-none" : "")">
+                                            @if (TempData["AddressForm"]?.ToString() == "edit")
+                                            { @await Html.PartialAsync("_EditAddressPartial", Model.Address) }
+
+                                            else { @await Html.PartialAsync("_AddAddressPartial", Model.Address) }
+                                        </div>
+                                        <div id="addressContainer" class="@(TempData["AddressForm"]?.ToString() == "true" ? "d-none" : "")">
+                                            <h3 class="d-flex justify-content-between">Billing Addresses
+                                                <a asp-controller="Account" asp-action="AddAddress"
+                                                class="btn sqr-btn add-address-btn">+ Add Address</a></h3>
+                                            <div class="row">
+                                                @foreach (Address address in Model.Addresses.OrderByDescending(a => a.IsDefault))
+                                                {
+                                                    <address class="col-sm-6 col-lg-4">
+                                                        <p><strong>@Model.ProfileVM.Name @Model.ProfileVM.Surname</strong>
+                                                            @if (address.IsDefault) { <span class="badge badge-pill badge-dark">Default</span> }
+                                                        </p>
+                                                        <p>
+                                                            @address.Line1, @address.Line2 <br>
+                                                            @address.TownCity, @address.ZipCode
+                                                        </p>
+                                                        <p>@address.Country</p>
+                                                        <a asp-controller="Account" asp-action="EditAddress" asp-route-id="@address.Id"
+                                                           class="btn sqr-btn edit-btn d-block"><i class="fa fa-edit"></i> Edit Address</a>
+                                                    </address>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Tab Content End -->
+                                
+                                <!-- Single Tab Content Start -->
+                                <div class="tab-pane fade @(TempData["Tab"]?.ToString() == "Orders" ? "show active" : "")" id="orders" role="tabpanel">
+                                    <div class="myaccount-content">
+                                        <h3>Orders</h3>
+                                        <div class="myaccount-table table-responsive text-center">
+                                            <table class="table table-bordered">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>Order</th>
+                                                        <th>Date</th>
+                                                        <th>Status</th>
+                                                        <th>Total</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Aug 22, 2018</td>
+                                                        <td>Pending</td>
+                                                        <td>$3000</td>
+                                                        <td><a href="cart.html" class="btn ">View</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>July 22, 2018</td>
+                                                        <td>Approved</td>
+                                                        <td>$200</td>
+                                                        <td><a href="cart.html" class="btn ">View</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>June 12, 2017</td>
+                                                        <td>On Hold</td>
+                                                        <td>$990</td>
+                                                        <td><a href="cart.html" class="btn ">View</a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Tab Content End -->
+                            </div>
+                        </div>
+                        <!-- My Account Tab Content End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

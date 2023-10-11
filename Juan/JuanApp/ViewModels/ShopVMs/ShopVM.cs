@@ -1,6 +1,4 @@
-﻿using JuanApp.Models;
-
-namespace JuanApp.ViewModels.ShopVMs;
+﻿namespace JuanApp.ViewModels.ShopVMs;
 public class ShopVM
 {
     public IEnumerable<Category> Categories { get; set; }

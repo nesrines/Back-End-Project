@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace JuanApp.Models;
+﻿namespace JuanApp.Models;
 public class Setting
 {
     public int Id { get; set; }

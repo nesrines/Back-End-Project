@@ -1,6 +1,4 @@
-﻿using JuanApp.ViewModels.BasketVMs;
-
-namespace JuanApp.Services.Interfaces;
+﻿namespace JuanApp.Services.Interfaces;
 public interface ILayoutService
 {
     Task<List<BasketVM>> GetBasketAsync();

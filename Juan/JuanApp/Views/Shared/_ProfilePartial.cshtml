@@ -1,0 +1,67 @@
+﻿@model ProfileVM
+
+<div class="myaccount-content">
+    <h3>Account Details</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="account-details-form">
+        <form method="post" asp-controller="Account" asp-action="ProfileAccount">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="single-input-item">
+                        <label asp-for="Name" class="required"></label>
+                        <input asp-for="Name" placeholder="First Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="single-input-item">
+                        <label asp-for="Surname" class="required"></label>
+                        <input asp-for="Surname" placeholder="Last Name" />
+                        <span asp-validation-for="Surname" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="single-input-item">
+                <label asp-for="UserName" class="required"></label>
+                <input asp-for="UserName" placeholder="User Name" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="single-input-item">
+                <label asp-for="Email" class="required"></label>
+                <input asp-for="Email" placeholder="Email Address" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <fieldset>
+                <legend>Password change</legend>
+                <div class="single-input-item">
+                    <label asp-for="CurrentPassword" class="required"></label>
+                    <input asp-for="CurrentPassword" placeholder="Current Password" />
+                    <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="single-input-item">
+                            <label asp-for="NewPassword" class="required"></label>
+                            <input asp-for="NewPassword" placeholder="New Password" />
+                            <span asp-validation-for="NewPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="single-input-item">
+                            <label asp-for="ConfirmPassword" class="required"></label>
+                            <input asp-for="ConfirmPassword" placeholder="Confirm Password" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="single-input-item">
+                <button class="btn sqr-btn">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationPartial")
+}

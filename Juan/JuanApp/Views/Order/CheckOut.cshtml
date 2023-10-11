@@ -1,0 +1,73 @@
+﻿@model OrderVM
+
+<div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap text-center">
+                    <nav aria-label="breadcrumb">
+                        <h1 class="breadcrumb-title">Checkout</h1>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="checkout-page-wrapper section-padding">
+    <div class="container">
+        <div class="row">
+            <!-- Checkout Billing Details -->
+            <div class="col-lg-6">
+                <div class="checkout-billing-details-wrap">
+                    @await Html.PartialAsync("_CheckOutPartial", Model.Order)
+                </div>
+            </div>
+
+            <!-- Order Summary Details -->
+            <div class="col-lg-6">
+                <div class="order-summary-details">
+                    <h4 class="checkout-title">Your Order Summary</h4>
+                    <div class="order-summary-content">
+                        <!-- Order Summary Table -->
+                        <div class="order-summary-table table-responsive text-center">
+                            <table class="table table-bordered">
+                                <thead><tr><th>Products</th><th>Total</th></tr></thead>
+                                <tbody>
+                                    @foreach (BasketVM basketVM in Model.BasketVMs)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a asp-controller="Product" asp-action="Details" asp-route-id="@basketVM.Id">
+                                                    @basketVM.Title <strong> × @basketVM.Count</strong></a>
+                                            </td>
+                                            <td>$@((basketVM.Price * basketVM.Count).ToString("0.00"))</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td><strong>Sub Total</strong></td>
+                                        <td><strong>$@((Model.BasketVMs.Sum(b => b.Price * b.Count)).ToString("0.00"))</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>VAT (20%)</strong></td>
+                                        <td><strong>$@((Model.BasketVMs.Sum(b => b.Price * b.Count * 0.2)).ToString("0.00"))</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Total Amount</strong></td>
+                                        <td><strong>$@((Model.BasketVMs.Sum(b => b.Price * b.Count * 1.2)).ToString("0.00"))</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <button form="checkOutForm" type="submit" class="btn btn-sqr mt-4">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

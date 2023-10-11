@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace JuanApp.Attributes.ValidationAttributes;
+﻿namespace JuanApp.Attributes.ValidationAttributes;
 public class MaxFileSize : ValidationAttribute
 {
     private readonly int _maxFileSize;

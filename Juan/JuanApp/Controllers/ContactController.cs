@@ -1,8 +1,4 @@
-﻿using JuanApp.DataAccessLayer;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace JuanApp.Controllers;
+﻿namespace JuanApp.Controllers;
 public class ContactController : Controller
 {
     private readonly AppDbContext _context;

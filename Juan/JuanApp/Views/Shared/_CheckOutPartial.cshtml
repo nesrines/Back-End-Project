@@ -1,0 +1,46 @@
+﻿@model Order
+
+<h4 class="checkout-title">Billing Details</h4>
+<div class="billing-form-wrap">
+    <form id="checkOutForm" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="single-input-item">
+                    <label asp-for="Name" class="required">First Name</label>
+                    <input asp-for="Name" placeholder="First Name" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="single-input-item">
+                    <label asp-for="Surname" class="required">Last Name</label>
+                    <input asp-for="Surname" placeholder="Last Name" />
+                </div>
+            </div>
+        </div>
+        <div class="single-input-item">
+            <label asp-for="Email" class="required">Email Address</label>
+            <input asp-for="Email" placeholder="Email Address" />
+        </div>
+
+        <div class="single-input-item">
+            <label asp-for="Country" class="required"></label>
+            <input asp-for="Country" placeholder="Country" />
+        </div>
+        <div class="single-input-item">
+            <label asp-for="TownCity" class="required"></label>
+            <input asp-for="Country" placeholder="Town / City" />
+        </div>
+        <div class="single-input-item">
+            <label asp-for="Line1" class="required mt-20"></label>
+            <input asp-for="Line1" placeholder="Street address Line 1" />
+        </div>
+        <div class="single-input-item">
+            <label asp-for="Line2" class="required mt-20"></label>
+            <input asp-for="Line2" placeholder="Street address Line 2" />
+        </div>
+        <div class="single-input-item">
+            <label asp-for="ZipCode" class="required"></label>
+            <input asp-for="ZipCode" placeholder="Postcode / ZIP" />
+        </div>
+    </form>
+</div>

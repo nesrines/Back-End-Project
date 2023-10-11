@@ -1,14 +1,9 @@
-﻿using JuanApp.Attributes.ValidationAttributes;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace JuanApp.Models;
+﻿namespace JuanApp.Models;
 public class Product : BaseEntity
 {
     [StringLength(100)]
     public string Title { get; set; }
-    [Column(TypeName = "smallmoney")]
-    [Display(Name = "Price ($)")]
+    [Column(TypeName = "smallmoney"), Display(Name = "Price ($)")]
     public double Price { get; set; }
     [Display(Name = "Discount (%)")]
     public byte Discount { get ; set; }
@@ -26,14 +21,12 @@ public class Product : BaseEntity
 
     public List<ProductImage>? ProductImages { get; set; }
 
-    [NotMapped]
-    [Display(Name = "Main Image")]
-    [MaxFileSize(100)]
-    [FileTypes("image/jpeg", "image/png")]
+    [NotMapped, Display(Name = "Main Image"), MaxFileSize(100), FileTypes("image/jpeg", "image/png")]
     public IFormFile? MainFile { get; set; }
 
-    [NotMapped]
-    [MaxFileSize(100)]
-    [FileTypes("image/jpeg", "image/png")]
+    [NotMapped, MaxFileSize(100), FileTypes("image/jpeg", "image/png")]
     public IEnumerable<IFormFile>? Images { get; set; }
+
+    public IEnumerable<BasketProduct>? BasketProducts { get; set; }
+    public IEnumerable<OrderProduct>? OrderProducts { get; set; }
 }

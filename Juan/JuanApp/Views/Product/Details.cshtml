@@ -55,13 +55,6 @@
                                 </div>
                                 <p>@Model.SmallDesc</p>
                                 <div class="quantity-cart-box d-flex align-items-center mb-20">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <span class="qtybtn">-</span>
-                                            <input data-id="@Model.Id" type="text" value="1">
-                                            <span class="inc qtybtn">+</span>
-                                        </div>
-                                    </div>
                                     @if (Model.Count > 0)
                                     {
                                         <a asp-controller="Basket" asp-action="AddBasket" asp-route-id="@Model.Id"

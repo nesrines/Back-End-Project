@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace JuanApp.Models;
+﻿namespace JuanApp.Models;
 public class Slider : BaseEntity
 {
     [StringLength(255)]
@@ -15,4 +13,7 @@ public class Slider : BaseEntity
     public string? ButtonLink { get; set; }
     [StringLength(20)]
     public string? ButtonText { get; set; }
+
+    [NotMapped, MaxFileSize(100), FileTypes("image/gif", "image/jpeg", "image/png")]
+    public IFormFile? BackgroundFile { get; set; }
 }

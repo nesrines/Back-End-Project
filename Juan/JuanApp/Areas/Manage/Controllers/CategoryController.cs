@@ -1,11 +1,5 @@
-﻿using JuanApp.DataAccessLayer;
-using JuanApp.Models;
-using JuanApp.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace JuanApp.Areas.Manage.Controllers;
-[Area("manage")]
+﻿namespace JuanApp.Areas.Manage.Controllers;
+[Area("manage"), Authorize(Roles = "SuperAdmin")]
 public class CategoryController : Controller
 {
     private readonly AppDbContext _context;
@@ -16,6 +10,7 @@ public class CategoryController : Controller
         _env = env;
     }
 
+    [Authorize(Roles = "Admin, SuperAdmin")]
     public IActionResult Index(int currentPage = 1)
     {
         IQueryable<Category> categories = _context.Categories
@@ -30,7 +25,7 @@ public class CategoryController : Controller
         return View();
     }
 
-    [HttpPost]
+    [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Category category)
     {
         if (!ModelState.IsValid) return View(category);
@@ -43,14 +38,14 @@ public class CategoryController : Controller
         category.Name = category.Name.Trim();
 
 
-        category.CreatedBy = "User";
-        category.CreatedDate = DateTime.UtcNow.AddHours(4);
+        category.CreatedBy = User.Identity.Name;
         await _context.Categories.AddAsync(category);
         await _context.SaveChangesAsync();
 
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(Roles = "Admin, SuperAdmin")]
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null) return BadRequest();
@@ -71,7 +66,7 @@ public class CategoryController : Controller
         return View(category);
     }
 
-    [HttpPost]
+    [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Update(int? id, Category category)
     {
         if (id == null || id != category.Id) return BadRequest();
@@ -89,6 +84,8 @@ public class CategoryController : Controller
         }
         dbCategory.Name = category.Name.Trim();
 
+        dbCategory.UpdatedBy = User.Identity.Name;
+        dbCategory.UpdatedDate = DateTime.UtcNow.AddHours(4);
         await _context.SaveChangesAsync();
 
         return RedirectToAction(nameof(Index));
@@ -122,7 +119,7 @@ public class CategoryController : Controller
         if (category.Products != null && category.Products.Count() > 0) return BadRequest();
 
         category.IsDeleted = true;
-        category.DeletedBy = "User";
+        category.DeletedBy = User.Identity.Name;
         category.DeletedDate = DateTime.UtcNow.AddHours(4);
         await _context.SaveChangesAsync();
 

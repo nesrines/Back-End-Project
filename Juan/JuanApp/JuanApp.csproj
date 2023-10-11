@@ -1,12 +1,31 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	  <LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
+	  
+	  <Using Include="JuanApp.Attributes.ValidationAttributes" />
+	  <Using Include="JuanApp.DataAccessLayer" />
+	  <Using Include="JuanApp.Helpers" />
+	  <Using Include="JuanApp.Models" />
+	  <Using Include="JuanApp.ViewModels" />
+	  <Using Include="JuanApp.ViewModels.AccountVMs" />
+	  <Using Include="JuanApp.ViewModels.BasketVMs" />
+	  <Using Include="JuanApp.ViewModels.OrderVMs" />
+	  <Using Include="JuanApp.ViewModels.ShopVMs" />
+	  <Using Include="Microsoft.AspNetCore.Authorization" />
+	  <Using Include="Microsoft.AspNetCore.Identity" />
+	  <Using Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+	  <Using Include="Microsoft.AspNetCore.Mvc" />
+	  <Using Include="Microsoft.EntityFrameworkCore" />
+	  <Using Include="System.ComponentModel.DataAnnotations" />
+	  <Using Include="System.ComponentModel.DataAnnotations.Schema" />
+	  
     <PackageReference Include="MailKit" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.22" />
